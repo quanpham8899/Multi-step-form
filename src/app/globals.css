@@ -2,20 +2,133 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Ubuntu-Bold';
+  src: url('/fonts/Ubuntu-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu-Regular';
+  src: url('/fonts/Ubuntu-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu-Medium';
+  src: url('/fonts/Ubuntu-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #ffffff;
+  --background: #171717;
+  --purplish-blue: #483eff;
+  --light-blue: hsl(206, 94%, 87%);
+  --marine-blue: hsl(213, 96%, 18%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #0a0a0a;
+    --background: #ededed;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Ubuntu-Regular, Arial, Helvetica, sans-serif;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+  /*background-color: rgb(205, 0, 0, .7);*/
+  background-color: "#859db0";
+}
+
+@media (max-width: 800px) {
+  body {
+    padding: 12px 8px;
+    width: 100%;
+    height:100%;
+  }
+}
+
+.main-container {
+  /*background-color: rgba(255, 255, 255, 1);*/
+  padding: 12px;
+  margin: 0;
+  border-radius: 12px;
+  box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.2);
+}
+
+.ubuntu-bold {
+  font-family: Ubuntu-Bold, Arial, Helvetica, sans-serif;
+}
+
+.ubuntu-medium {
+  font-family: Ubuntu-Medium, Arial, Helvetica, sans-serif;
+}
+
+.ubuntu-regular {
+  font-family: Ubuntu-Regular, Arial, Helvetica, sans-serif;
+}
+
+.text-purplish-blue{
+  color: var(--purplish-blue);
+}
+
+.text-light-blue { 
+  color: var(--light-blue);
+}
+
+.text-marine-blue { 
+  color: var(--marine-blue);
+}
+
+.bg-purplish-blue{
+  background-color: var(--purplish-blue);
+}
+
+.bg-marine-blue { 
+  background-color: var(--marine-blue);
+}
+
+.bg-light-blue{
+  background-color: var(--light-blue);
+}
+
+.border-purplish-blue{
+  border-color: var(--purplish-blue);
+}
+
+.border-light-blue{
+  border-color: var(--light-blue);
+}
+
+.background-desktop{
+  background-image: url('/icons/bg-sidebar-desktop.svg');
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.background-mobile{
+  background-image: url('/icons/bg-sidebar-mobile.svg');
+  background-size: 110%;
+  background-repeat: no-repeat;
+}
+
+@layer utilities {
+  .focus\:border-purplist-blue:focus {
+    border-style: solid;
+    border-color: var(--purplish-blue); 
+  }
 }
