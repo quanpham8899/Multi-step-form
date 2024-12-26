@@ -5,7 +5,7 @@ import { AddOnProps } from "./pick_add_on";
 export default function Summary({ payments, addons, paymentMethod, changePage }: { payments: paymentProps[], addons: AddOnProps[], paymentMethod: PaymentMethod, changePage: () => void }) {
 
   const method = paymentMethod === PaymentMethod.Yearly ? "yr" : "mo";
-  let paymentMethodText = (paymentMethod === PaymentMethod.Yearly ? "Yearly" : "Monthly");
+  const paymentMethodText = (paymentMethod === PaymentMethod.Yearly ? "Yearly" : "Monthly");
 
   const totalAmount = () => {
     let sum = 0;

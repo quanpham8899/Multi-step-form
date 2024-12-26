@@ -41,6 +41,7 @@ export default function PlanSelection({ data, paymentMethod, onPaymentMethodChan
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Plan = ({ icon, title, price, discount, method, selected, setSelected }: any) => {
 
   function handleClick() {
