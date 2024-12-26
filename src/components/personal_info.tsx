@@ -8,7 +8,7 @@ type props = {
 export default function PersonalInfo({ userInfo, onChangeUserInfo }: props) {
 
   return (
-    <div className="flex flex-col gap-12 align-middle">
+    <div className="flex flex-col gap-12 align-middle h-min max-sm:gap-8">
       <div className="">
         <h1 className="font-semibold text-3xl ubuntu-bold">Personal info</h1>
         <p className="text-zinc-500">Please provide your name, email address, and phone number.</p>

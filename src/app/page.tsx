@@ -52,7 +52,9 @@ export default function Home() {
 
   // On click for the nav buttons
   function onClicked(step: number) {
-    if (confirmed) return;
+    if (confirmed) {
+      return;
+    }
     const updated = nav.map((b) =>
       b.step === step ? { ...b, selected: true } : { ...b, selected: false }
     );
@@ -161,9 +163,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className='main-container p-4 flex w-full h-4/6 min-h-max 2xl:w-6/12 md:w-4/6 flex-col xl:flex-row max-2xl:h-5/6'>
+    <div className='main-container p-4 flex justify-center w-full h-4/6 min-h-full 2xl:w-6/12 md:w-5/6 flex-col xl:flex-row max-2xl:h-5/6'>
       <NavigationBoard data={nav} />
-      <div className='flex flex-col justify-between gap-8 flex-1 py-10 px-20 max-md:px-4 overflow-y-auto'>
+      <div className='block flex flex-col justify-between gap-8 flex-1 mt-4 py-10 px-20 max-md:px-4 max overflow-y-auto max-sm:rounded-lg m-auto w-11/12 transition-all duration-300 max-sm:bg-zinc-100 max-sm:-mt-12 max-sm:shadow-md max-sm:mb-24'>
         {formRenderer()}
         <ButtonLayout step={selectedStep} next={() => nextStep()} prev={() => prevStep()} confirm={onConfirm} />
       </div>

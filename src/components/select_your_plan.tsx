@@ -16,7 +16,7 @@ export default function PlanSelection({ data, paymentMethod, onPaymentMethodChan
   let _priceMul = paymentMethod === PaymentMethod.Monthly ? 1 : paymentMethod === PaymentMethod.Yearly ? 10 : 1;
 
   return (
-    <div className="flex flex-col gap-12 align-middle">
+    <div className="flex flex-col gap-12 align-middle max-sm:gap-8">
       <div className="">
         <h1 className="font-semibold text-3xl ubuntu-bold">Select your plan</h1>
         <p className="text-zinc-500">You have the option of monthly or yearly billing.</p>
@@ -28,7 +28,7 @@ export default function PlanSelection({ data, paymentMethod, onPaymentMethodChan
           ))
         }
       </div>
-      <div className="flex justify-center gap-4 py-3 bg-zinc-100 rounded-md text-center">
+      <div className="flex justify-center gap-4 py-3 bg-zinc-200 rounded-md text-center">
         <p className={`${paymentMethod === PaymentMethod.Monthly ? 'font-bold' : 'font-normal'} w-1/6`}>Monthly</p>
         <div
           onClick={() => onPaymentMethodChange()}
@@ -51,7 +51,7 @@ const Plan = ({ icon, title, price, discount, method, selected, setSelected }: a
     <div
       onClick={handleClick}
       className={
-        `border rounded-md p-4 flex flex-col gap-8 pr-10 transition-all duration-300 hover:cursor-pointer hover:shadow-xl min-w-36
+        `border rounded-md p-4 flex flex-col gap-8 pr-10 transition-all duration-300 hover:cursor-pointer hover:shadow-xl min-w-36 max-sm:flex-row max-sm:items-center
         ${selected ? 'shadow-zinc-400 shadow-inner bg-zinc-200' : 'border-zinc-300'}
       `}>
       <div>
@@ -62,11 +62,11 @@ const Plan = ({ icon, title, price, discount, method, selected, setSelected }: a
           alt="icon"
         />
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 transition-all duration-300 max-sm:justify-between">
         <h1 className="ubuntu-bold">{title}</h1>
         <p className="text-zinc-400">{`$${price} /${method === PaymentMethod.Monthly ? 'mo' : 'yr'} `}</p>
-        <p className="text-xs">{discount}</p>
+        <p className={`text-xs ${method === PaymentMethod.Monthly ? "max-sm:hidden" : ""}`}>{discount}</p>
       </div>
-    </div>
+    </div >
   )
 }

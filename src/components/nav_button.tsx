@@ -32,14 +32,14 @@ const NavButton: React.FC<NavButtonProps> = ({ step, content, selected, setSelec
   }
 
   return (
-    <div className="flex gap-5 text-white pb-3 cursor-pointer max-xl:gap-2"
+    <div className="flex gap-5 text-white pb-3 cursor-pointer max-xl:gap-2 transition-all duration-300 max-sm:-translate-y-6"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onClick={handleClick}
     >
       <div
         className={
-          `translate-y-1.5 ubuntu-bold blue w-10 h-10 rounded-full flex items-center justify-center border-2 trasition-all duration-300 backdrop-blur-sm
+          `translate-y-1.5 ubuntu-bold blue w-8 h-8 rounded-full flex items-center justify-center border-2 trasition-all duration-300 backdrop-blur-sm
           ${!hover ? 'scale-100' : 'scale-125'}
           ${selected ? 'bg-light-blue text-black font-bold' : 'bg-purplist-blue text-white font-normal'}`
         }>

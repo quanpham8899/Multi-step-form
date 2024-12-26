@@ -15,7 +15,7 @@ export default function AddOn({ props, paymentMethod, onChange }: { props: AddOn
   }
 
   return (
-    <div className="flex flex-col gap-12 align-middle">
+    <div className="flex flex-col gap-12 align-middle max-sm:gap-8">
       <div className="">
         <h1 className="font-semibold text-3xl ubuntu-bold">Pick add-ons</h1>
         <p className="text-zinc-500">Add-ons help enhance your experience.</p>
