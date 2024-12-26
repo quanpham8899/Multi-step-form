@@ -2,13 +2,14 @@
 
 import NavigationBoard from '@/components/navigation_board'
 import { NavButtonProps } from "@/components/nav_button";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import PersonalInfo from '@/components/personal_info';
 import PlanSelection, { paymentProps } from '@/components/select_your_plan';
 import ButtonLayout from '@/components/button_layout';
 import AddOn, { AddOnProps } from '@/components/pick_add_on';
 import Summary from '@/components/summary';
 import Confirm from '@/components/confirm';
+import Image from 'next/image';
 
 export enum PaymentMethod {
   Monthly,
@@ -48,7 +49,7 @@ export default function Home() {
 
   const [userInfo, setUserInfo] = React.useState({ name: "", email: "", phone: "" });
 
-  const [selectedPlan, setSelectedPlan] = React.useState(-1);
+  const [_, setSelectedPlan] = React.useState(-1);
 
   // On click for the nav buttons
   function onClicked(step: number) {
@@ -140,20 +141,6 @@ export default function Home() {
     return <>Invalid form</>;
   };
 
-  const summary = (): number => {
-    let sum = 0;
-
-    payments.forEach((p) => {
-      sum += p.selected ? p.price : 0;
-    });
-    sum *= paymentMethod === PaymentMethod.Monthly ? 1 : paymentMethod === PaymentMethod.Yearly ? 10 : 1;
-    addons.forEach((a) => {
-      sum += (a.selected ? a.price : 0) * (paymentMethod === PaymentMethod.Monthly ? 1 : paymentMethod === PaymentMethod.Yearly ? 10 : 1);
-    });
-
-    return sum;
-  }
-
   React.useEffect(() => {
     nav.forEach((item) => {
       if (item.selected) {
@@ -165,10 +152,18 @@ export default function Home() {
   return (
     <div className='main-container p-4 flex justify-center w-full h-4/6 min-h-full 2xl:w-6/12 md:w-5/6 flex-col xl:flex-row max-2xl:h-5/6'>
       <NavigationBoard data={nav} />
-      <div className='block flex flex-col justify-between gap-8 flex-1 mt-4 py-10 px-20 max-md:px-4 max overflow-y-auto max-sm:rounded-lg m-auto w-11/12 transition-all duration-300 max-sm:bg-zinc-100 max-sm:-mt-12 max-sm:shadow-md max-sm:mb-24'>
+      <div className='flex flex-col justify-between gap-8 flex-1 mt-4 py-10 px-20 max-md:px-4 max overflow-y-auto max-sm:rounded-lg m-auto w-11/12 transition-all duration-300 max-sm:bg-zinc-100 max-sm:-mt-12 max-sm:shadow-md max-sm:mb-24'>
         {formRenderer()}
         <ButtonLayout step={selectedStep} next={() => nextStep()} prev={() => prevStep()} confirm={onConfirm} />
       </div>
+      <Image
+        src="/nextjs-github-pages/vercel.svg"
+        alt="Vercel Logo"
+        className={`opacity-10 absolute bottom-0 right-0 max-sm:hidden`}
+        width={100}
+        height={24}
+        priority
+      />
     </div>
   )
 }
