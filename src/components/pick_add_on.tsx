@@ -1,4 +1,4 @@
-import { PaymentMethod } from "@/app/page";
+import { PaymentMethod } from "@/components/select_your_plan";
 import React from "react";
 
 export interface AddOnProps {

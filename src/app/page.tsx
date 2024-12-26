@@ -11,11 +11,6 @@ import Summary from '@/components/summary';
 import Confirm from '@/components/confirm';
 import Image from 'next/image';
 
-export enum PaymentMethod {
-  Monthly,
-  Yearly,
-}
-
 export default function Page() {
 
   const [confirmed, setConfirmed] = React.useState(false);

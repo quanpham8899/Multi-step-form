@@ -1,4 +1,4 @@
-import { PaymentMethod } from "@/app/page";
+import { PaymentMethod } from "@/components/select_your_plan";
 import { paymentProps } from "./select_your_plan";
 import { AddOnProps } from "./pick_add_on";
 

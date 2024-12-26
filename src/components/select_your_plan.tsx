@@ -1,5 +1,9 @@
-import { PaymentMethod } from "@/app/page";
 import Image from "next/image"
+
+export enum PaymentMethod {
+  Monthly,
+  Yearly,
+}
 
 export interface paymentProps {
   selectedIndex: number,
