@@ -16,7 +16,7 @@ export enum PaymentMethod {
   Yearly,
 }
 
-export default function Home() {
+export default function Page() {
 
   const [confirmed, setConfirmed] = React.useState(false);
 
