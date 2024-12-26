@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ButtonLayout({ step, next, prev, confirm }: any) {
+export default function ButtonLayout({ step, next, prev, confirm }: { step: number, next: () => void, prev: () => void, confirm: () => void }) {
 
   const [width, setWidth] = React.useState(window.innerWidth);
 

@@ -141,13 +141,13 @@ export default function Home() {
     return <>Invalid form</>;
   };
 
-  React.useEffect(() => {
-    nav.forEach((item) => {
-      if (item.selected) {
-        setSelectedStep(item.step);
-      }
-    });
-  }, []);
+  // React.useEffect(() => {
+  //   nav.forEach((item) => {
+  //     if (item.selected) {
+  //       setSelectedStep(item.step);
+  //     }
+  //   });
+  // }, []);
 
   return (
     <div className='main-container p-4 flex justify-center w-full h-4/6 min-h-full 2xl:w-6/12 md:w-5/6 flex-col xl:flex-row max-2xl:h-5/6'>
