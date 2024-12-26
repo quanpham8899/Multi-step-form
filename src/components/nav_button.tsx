@@ -11,20 +11,22 @@ export interface NavButtonProps {
 
 const NavButton: React.FC<NavButtonProps> = ({ step, content, selected, setSelected }) => {
   const [hover, setHover] = React.useState(false);
-  const [width, setWidth] = React.useState(0);
+  const [width, setWidth] = React.useState<number | null>(null);
 
   React.useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        setWidth(window.innerWidth);
+      };
 
-    // Add event listener when component mounts
-    window.addEventListener("resize", handleResize);
+      // Add event listener when component mounts
+      window.addEventListener("resize", handleResize);
 
-    // Cleanup event listener when component unmounts
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+      // Cleanup event listener when component unmounts
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
   }, []);
 
   function handleClick() {
@@ -45,7 +47,7 @@ const NavButton: React.FC<NavButtonProps> = ({ step, content, selected, setSelec
         }>
         {step}
       </div>
-      {width > 800 &&
+      {((width !== null && width > 800) || (width === null)) &&
         <div className={`flex flex-col transition-all duration-300 ${hover ? 'translate-x-2' : 'translate-x-0'}`}>
           <div>STEP {step}</div>
           <div className="font-bold">
