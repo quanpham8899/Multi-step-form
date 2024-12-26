@@ -2,6 +2,7 @@ import React from "react";
 
 export default function ButtonLayout({ step, next, prev, confirm }: { step: number, next: () => void, prev: () => void, confirm: () => void }) {
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [width, setWidth] = React.useState(window.innerWidth);
 
   React.useEffect(() => {

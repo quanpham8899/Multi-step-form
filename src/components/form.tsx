@@ -1,6 +1,6 @@
-export default function Form({ content }: any) {
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function Form() {
   return (
-    <div className="bg-cyan-300 p-5">{content}</div>
+    <></>
   )
 }

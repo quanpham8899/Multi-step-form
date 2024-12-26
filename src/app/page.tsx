@@ -49,6 +49,7 @@ export default function Home() {
 
   const [userInfo, setUserInfo] = React.useState({ name: "", email: "", phone: "" });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setSelectedPlan] = React.useState(-1);
 
   // On click for the nav buttons

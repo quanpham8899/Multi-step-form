@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ChangeEvent } from "react"
 
 type props = {
   userInfo: { name: string, email: string, phone: string },
@@ -14,15 +14,15 @@ export default function PersonalInfo({ userInfo, onChangeUserInfo }: props) {
         <p className="text-zinc-500">Please provide your name, email address, and phone number.</p>
       </div>
       <div className="flex flex-col gap-3">
-        <InputField type="text" label={"Name"} inputValue={userInfo.name} onChange={(e: any) => onChangeUserInfo({ ...userInfo, name: e.target.value })} placeholder="e.g. Stephen King" />
-        <InputField type="email" label={"Email Address"} inputValue={userInfo.email} onChange={(e: any) => onChangeUserInfo({ ...userInfo, email: e.target.value })} placeholder="e.g. stephenking@lorem.com" />
-        <InputField type="tel" label={"Phone number"} inputValue={userInfo.phone} onChange={(e: any) => onChangeUserInfo({ ...userInfo, phone: e.target.value })} placeholder="e.g. +1 234 567 890" />
+        <InputField type="text" label={"Name"} inputValue={userInfo.name} onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeUserInfo({ ...userInfo, name: e.target.value })} placeholder="e.g. Stephen King" />
+        <InputField type="email" label={"Email Address"} inputValue={userInfo.email} onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeUserInfo({ ...userInfo, email: e.target.value })} placeholder="e.g. stephenking@lorem.com" />
+        <InputField type="tel" label={"Phone number"} inputValue={userInfo.phone} onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeUserInfo({ ...userInfo, phone: e.target.value })} placeholder="e.g. +1 234 567 890" />
       </div>
     </div >
   )
 }
 
-function InputField({ label, inputValue, placeholder, onChange, type }: any) {
+function InputField({ label, inputValue, placeholder, onChange, type }: { label: string, inputValue: string, placeholder: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void, type: string }) {
 
   const [emptyField, setEmptyField] = React.useState(false);
   const [focused, setFocused] = React.useState(false);

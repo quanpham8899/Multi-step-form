@@ -2,7 +2,6 @@
 
 import React from "react";
 import NavButton, { NavButtonProps } from "./nav_button";
-import Image from "next/image";
 
 export interface ButtonListProps {
   data: NavButtonProps[];
