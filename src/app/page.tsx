@@ -153,7 +153,7 @@ export default function Page() {
         <ButtonLayout step={selectedStep} next={() => nextStep()} prev={() => prevStep()} confirm={onConfirm} />
       </div>
       <Image
-        src="/nextjs-github-pages/vercel.svg"
+        src="/multi-step-form/vercel.svg"
         alt="Vercel Logo"
         className={`opacity-10 absolute bottom-0 right-0 max-sm:hidden`}
         width={100}
