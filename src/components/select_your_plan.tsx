@@ -13,7 +13,7 @@ export interface paymentProps {
 
 export default function PlanSelection({ data, paymentMethod, onPaymentMethodChange }: { data: paymentProps[], paymentMethod: PaymentMethod, onPaymentMethodChange: () => void }) {
 
-  let _priceMul = paymentMethod === PaymentMethod.Monthly ? 1 : paymentMethod === PaymentMethod.Yearly ? 10 : 1;
+  const _priceMul = paymentMethod === PaymentMethod.Monthly ? 1 : paymentMethod === PaymentMethod.Yearly ? 10 : 1;
 
   return (
     <div className="flex flex-col gap-12 align-middle max-sm:gap-8">

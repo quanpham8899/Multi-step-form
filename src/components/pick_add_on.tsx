@@ -1,5 +1,5 @@
 import { PaymentMethod } from "@/app/page";
-import React, { ChangeEvent } from "react";
+import React from "react";
 
 export interface AddOnProps {
   title: string,
