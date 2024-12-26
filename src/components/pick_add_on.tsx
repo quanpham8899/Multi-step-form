@@ -5,10 +5,10 @@ export interface AddOnProps {
   title: string,
   description: string,
   price: number,
-  selected: boolean,
+  selected: string,
 }
 
-export default function AddOn({ props, paymentMethod, onChange }: { props: AddOnProps[], paymentMethod: PaymentMethod, onChange: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void }) {
+export default function AddOn({ props, paymentMethod, onChange }: { props: AddOnProps[], paymentMethod: PaymentMethod, onChange: (index: number, select: string) => void }) {
 
   const getPrice = (value: number) => {
     return value * (paymentMethod === PaymentMethod.Monthly ? 1 : paymentMethod === PaymentMethod.Yearly ? 10 : 1);
@@ -22,26 +22,36 @@ export default function AddOn({ props, paymentMethod, onChange }: { props: AddOn
       </div>
       <div className="flex flex-col gap-3">
         {
-          props !== undefined && props.map((p, i) => (
-            <AddOnCard key={i} title={p.title} description={p.description} price={getPrice(p.price)} selected={p.selected} onChange={onChange(i)} />
-          ))
+          props !== undefined && props.map((p, i) => {
+
+            return (
+              <AddOnCard key={i} index={i} title={p.title} description={p.description} price={getPrice(p.price)} selected={p.selected} onChange={onChange} />
+            )
+          })
         }
       </div>
     </div >
   )
 }
 
-function AddOnCard({ title, description, price, selected, onChange }: { title: string, description: string, price: number, selected: boolean, onChange: (event: ChangeEvent<HTMLInputElement>) => void }) {
+function AddOnCard({ index, title, description, price, selected, onChange }: { index: number, title: string, description: string, price: number, selected: string, onChange: (index: number, select: string) => void }) {
 
   const checkboxRef = React.useRef<HTMLInputElement>(null);
 
   return (
     <div
+      onClick={() => {
+        onChange(index, selected)
+      }}
       className="border border-zinc-300 rounded-md flex justify-between items-center p-5 py-4 gap-5 outline-none hover:border-blue-800 cursor-pointer">
       <input
+        // disabled={true}
         ref={checkboxRef}
-        checked={selected}
-        onChange={onChange}
+        // value={selected}
+        checked={selected === 'on' ? true : false}
+        onChange={() => {
+          // console.log(index, selected);
+        }}
         type="checkbox"
         className="w-5 h-5 cursor-pointer" />
       <div className="flex flex-col flex-1">

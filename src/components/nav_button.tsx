@@ -45,7 +45,7 @@ const NavButton: React.FC<NavButtonProps> = ({ step, content, selected, setSelec
         }>
         {step}
       </div>
-      {width > 840 &&
+      {width > 800 &&
         <div className={`flex flex-col transition-all duration-300 ${hover ? 'translate-x-2' : 'translate-x-0'}`}>
           <div>STEP {step}</div>
           <div className="font-bold">

@@ -2,13 +2,13 @@
 
 import NavigationBoard from '@/components/navigation_board'
 import { NavButtonProps } from "@/components/nav_button";
-import React, { ChangeEvent, ChangeEventHandler } from "react";
+import React, { ChangeEvent } from "react";
 import PersonalInfo from '@/components/personal_info';
 import PlanSelection, { paymentProps } from '@/components/select_your_plan';
 import ButtonLayout from '@/components/button_layout';
 import AddOn, { AddOnProps } from '@/components/pick_add_on';
 import Summary from '@/components/summary';
-import TestingCheckBox from '@/components/testing_checkbox';
+import Confirm from '@/components/confirm';
 
 export enum PaymentMethod {
   Monthly,
@@ -17,23 +17,26 @@ export enum PaymentMethod {
 
 export default function Home() {
 
+  const [confirmed, setConfirmed] = React.useState(false);
+
   const navButtons: (NavButtonProps)[] = [
-    { step: 1, content: 'YOUR INFO', selected: false, setSelected: () => { onClicked(1) } },
+    { step: 1, content: 'YOUR INFO', selected: true, setSelected: () => { onClicked(1) } },
     { step: 2, content: 'SELECT PLAN', selected: false, setSelected: () => { onClicked(2) } },
-    { step: 3, content: 'ADD-ONS', selected: true, setSelected: () => { onClicked(3) } },
+    { step: 3, content: 'ADD-ONS', selected: false, setSelected: () => { onClicked(3) } },
     { step: 4, content: 'SUMMARY', selected: false, setSelected: () => { onClicked(4) } },
+    { step: 5, content: 'CONFIRM', selected: false, setSelected: () => { onClicked(5) } },
   ];
 
   const payment: paymentProps[] = [
-    { selectedIndex: 0, selected: true, title: "Arcade", iconPath: "/icons/icon-arcade.svg", price: 10, onSelected: () => onPlanSelected(0) },
-    { selectedIndex: 1, selected: false, title: "Advance", iconPath: "/icons/icon-advanced.svg", price: 1, onSelected: () => onPlanSelected(1) },
-    { selectedIndex: 2, selected: false, title: "Pro", iconPath: "/icons/icon-pro.svg", price: 10, onSelected: () => onPlanSelected(2) },
+    { selectedIndex: 0, selected: true, title: "Arcade", iconPath: "/icons/icon-arcade.svg", price: 9, onSelected: () => onPlanSelected(0) },
+    { selectedIndex: 1, selected: false, title: "Advance", iconPath: "/icons/icon-advanced.svg", price: 12, onSelected: () => onPlanSelected(1) },
+    { selectedIndex: 2, selected: false, title: "Pro", iconPath: "/icons/icon-pro.svg", price: 15, onSelected: () => onPlanSelected(2) },
   ];
 
   const addon: AddOnProps[] = [
-    { title: "Online service", description: "Access to multiplayer games", price: 1, selected: false, },
-    { title: "Larger storage", description: "Extra 1TB of cloud save", price: 2, selected: false, },
-    { title: "Customizable profile", description: "Custom theme on your profile", price: 2, selected: false, },
+    { title: "Online service", description: "Access to multiplayer games", price: 1, selected: 'off', },
+    { title: "Larger storage", description: "Extra 1TB of cloud save", price: 2, selected: 'off', },
+    { title: "Customizable profile", description: "Custom theme on your profile", price: 2, selected: 'off', },
   ];
 
   const [selectedStep, setSelectedStep] = React.useState(1);
@@ -49,6 +52,7 @@ export default function Home() {
 
   // On click for the nav buttons
   function onClicked(step: number) {
+    if (confirmed) return;
     const updated = nav.map((b) =>
       b.step === step ? { ...b, selected: true } : { ...b, selected: false }
     );
@@ -65,9 +69,9 @@ export default function Home() {
     setPayments(updated);
   }
 
-  const handleAddOnChanged = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
+  const handleAddOnChanged = (index: number, select: string) => {
     const updated = addons.map((a, i) =>
-      i === index ? { ...a, selected: event.target.checked } : a
+      i === index ? { ...a, selected: select === 'on' ? 'off' : 'on' } : a
     );
     setAddons(updated)
   }
@@ -95,8 +99,15 @@ export default function Home() {
     onClicked(selectedStep - 1);
   }
 
-  function confirm() {
-    console.log("Confirm payment");
+  function onConfirm() {
+    if (userInfo.name === "" || userInfo.email === "" || userInfo.phone === "") {
+      alert("Please fill in all fields");
+      onClicked(1);
+      return;
+    }
+
+    onClicked(5);
+    setConfirmed(true);
   }
 
   function onPaymentMethodChange() {
@@ -115,7 +126,9 @@ export default function Home() {
           case 3:
             return <AddOn props={addons} paymentMethod={paymentMethod} onChange={handleAddOnChanged} />
           case 4:
-            return <Summary />;
+            return <Summary paymentMethod={paymentMethod} payments={payments} addons={addons} changePage={() => onClicked(2)} />;
+          case 5:
+            return <Confirm />
           default:
             return <>Invalid form</>;
         }
@@ -148,11 +161,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div className='main-container p-4 flex w-full h-4/6 2xl:w-6/12 md:w-4/6 flex-col xl:flex-row max-2xl:h-5/6'>
+    <div className='main-container p-4 flex w-full h-4/6 min-h-max 2xl:w-6/12 md:w-4/6 flex-col xl:flex-row max-2xl:h-5/6'>
       <NavigationBoard data={nav} />
-      <div className='flex flex-col justify-between gap-8 flex-1 py-10 px-20 max-md:px-4'>
+      <div className='flex flex-col justify-between gap-8 flex-1 py-10 px-20 max-md:px-4 overflow-y-auto'>
         {formRenderer()}
-        <ButtonLayout step={selectedStep} next={() => nextStep()} prev={() => prevStep()} />
+        <ButtonLayout step={selectedStep} next={() => nextStep()} prev={() => prevStep()} confirm={onConfirm} />
       </div>
     </div>
   )

@@ -51,8 +51,8 @@ const Plan = ({ icon, title, price, discount, method, selected, setSelected }: a
     <div
       onClick={handleClick}
       className={
-        `border border-zinc-300 rounded-md p-4 flex flex-col gap-8 pr-10 transition-all duration-300 hover:cursor-pointer hover:shadow-xl min-w-36
-        ${selected ? 'border-blue-900 bg-zinc-200' : 'border-zinc-300'}
+        `border rounded-md p-4 flex flex-col gap-8 pr-10 transition-all duration-300 hover:cursor-pointer hover:shadow-xl min-w-36
+        ${selected ? 'shadow-zinc-400 shadow-inner bg-zinc-200' : 'border-zinc-300'}
       `}>
       <div>
         <Image
